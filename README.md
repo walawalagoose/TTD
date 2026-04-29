@@ -54,11 +54,11 @@ CoDiRe is evaluated on various common-corruption (CIFAR-10-C, CIFAR-100-C, and I
 </p>
 
 <p align="center">
-  <img src="./figs/vlm_exp.png" alt="VLM-TTA comparison" width="75%">
+  <img src="./figs/dg_exp.png" alt="Domain generalization results" width="95%">
 </p>
 
 <p align="center">
-  <img src="./figs/dg_exp.png" alt="Domain generalization results" width="95%">
+  <img src="./figs/vlm_exp.png" alt="VLM-TTA comparison" width="75%">
 </p>
 
 ## Run
@@ -213,7 +213,7 @@ If you find this repository useful, please consider citing our paper:
 ```bibtex
 @article{chen2025test,
   title={Test-Time Distillation for Continual Model Adaptation},
-  author={Chen*, Xiao and Huang*, Jiazhen and Liu, Zhiming and Jiang, Qinting and Huang, Fanding and Jiang, Jingyan and Wang, Zhi},
+  author={Chen, Xiao* and Huang, Jiazhen* and Liu, Zhiming and Jiang, Qinting and Huang, Fanding and Jiang, Jingyan and Wang, Zhi},
   journal={arXiv preprint arXiv:2506.02671},
   year={2025}
 }
@@ -222,3 +222,5 @@ If you find this repository useful, please consider citing our paper:
 ## Acknowledgment
 
 This repository builds on prior open-source test-time adaptation codebases. We thank the community for making reproducible research easier.
+
+For any additional questions, please feel free to [email](mailto:huangjiazhen1125@gmail.com) me.
