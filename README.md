@@ -12,7 +12,7 @@
   </a>
 </p>
 
-This is the official repository of our paper: **Test-Time Distillation for Continual Model Adaptation**, accepted by CVPR 2026 Findings.
+This is the official repository of our paper: [Test-Time Distillation for Continual Model Adaptation](https://arxiv.org/abs/2506.02671), accepted by CVPR 2026 Findings.
 
 ## Overview
 Continual Test-Time Adaptation (CTTA) usually learns from the target model's own predictions, which can amplify early mistakes under severe distribution shifts. We propose **Test-Time Distillation (TTD)**: instead of relying only on this internal signal, the target model adapts with an external signal from a frozen Vision-Language Model (VLM). Our method, **CoDiRe** (**Co**ntinual **Di**stillation and **Re**ctification), builds a robust blended teacher from the VLM and target model, then uses distillation and optimal-transport-based rectification for stable continual adaptation.
@@ -41,7 +41,7 @@ CoDiRe has three main ingredients:
 
 ## Main Results
 
-CoDiRe is evaluated on common-corruption CTTA and domain generalization benchmarks, including CIFAR-10-C, CIFAR-100-C, ImageNet-C, PACS, and OfficeHome. On ImageNet-C, CoDiRe outperforms CoTTA by **10.55%** while using only **48%** of its time cost. It also compares favorably with VLM-based TTA methods, showing that using a VLM as a carefully blended teacher is more reliable than directly trusting the VLM or naively fusing predictions.
+CoDiRe is evaluated on various common-corruption (CIFAR-10-C, CIFAR-100-C, and ImageNet-C) and domain generalization benchmarks (PACS and OfficeHome). On ImageNet-C, CoDiRe outperforms CoTTA by **10.55%** while using only **48%** of its time cost. It also compares favorably with VLM-based TTA and simple TTD methods, showing that using a VLM as a carefully blended teacher is more reliable than directly trusting the VLM or naively fusing predictions.
 
 <p align="center">
   <img src="./figs/cifar10c_exp.png" alt="CIFAR-10-C results" width="95%">
@@ -63,7 +63,7 @@ CoDiRe is evaluated on common-corruption CTTA and domain generalization benchmar
 
 ### Installation
 
-This codebase is built on [TTAB](https://github.com/LINs-lab/ttab). We recommend creating a fresh conda environment:
+We recommend creating a fresh conda environment:
 
 ```bash
 git clone https://github.com/walawalagoose/TTD.git
@@ -181,11 +181,11 @@ python run_extract.py --in_dir logs/<your_log_dir>
 If you find this repository useful, please consider citing our paper:
 
 ```bibtex
-@inproceedings{chen2026testtime,
+@article{chen2025test,
   title={Test-Time Distillation for Continual Model Adaptation},
-  author={Chen, Xiao and Huang, Jiazhen and Liu, Zhiming and Jiang, Qinting and Huang, Fanding and Jiang, Jingyan and Wang, Zhi},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  year={2026}
+  author={Chen*, Xiao and Huang*, Jiazhen and Liu, Zhiming and Jiang, Qinting and Huang, Fanding and Jiang, Jingyan and Wang, Zhi},
+  journal={arXiv preprint arXiv:2506.02671},
+  year={2025}
 }
 ```
 
