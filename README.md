@@ -35,6 +35,8 @@ CoDiRe has three main ingredients:
 - **Continual distillation:** the VLM and target model are fused into a blended teacher using MSP-based confidence, avoiding entropy-biased fusion across heterogeneous models.
 - **Rectification:** optimal transport refines the target prediction distribution, and a domain-switch detector selectively resets normalization layers to improve continual stability.
 
+For **continual** streams, this repository supports periodic domain-wise logging. CTTA runs can therefore report both the overall performance and each domain's individual performance along the stream.
+
 <p align="center">
   <img src="./figs/ttd_overview.png" alt="CoDiRe overview" width="95%">
 </p>
@@ -104,7 +106,11 @@ data_path/
     └── sketch/
 ```
 
-Prepare source-pretrained checkpoints under `pretrained_ckpts/` or pass the checkpoint explicitly with `--ckpt_path`. Example paths used by the experiment files include:
+Prepare source-pretrained checkpoints under `pretrained_ckpts/` or pass the checkpoint explicitly with `--ckpt_path`. 
+
+We provide a [pretrained checkpoints](https://drive.google.com/file/d/1OixIIEx9BoSoUvs7HAq4KX-bg53aJ94_/view?usp=sharing) here. These checkpoints were pretrained on the in-distribution datasets by self-supervised learning with a rotation prediction task.
+
+Example paths used by the experiment files include:
 
 ```text
 pretrained_ckpts/
@@ -140,9 +146,33 @@ python run_exp.py \
 
 For ImageNet-C, use `--base_data_name imagenet`, set `--data_names` to the ImageNet-C corruption sequence, and point `--data_path` to the directory containing `imagenet/` and `imagenet-c/`.
 
+### CTTA vs. TTA Configuration
+
+The most important configuration field is `data_names`:
+
+- **CTTA / continual stream:** put multiple domains in **one string**, connected by semicolons. The model adapts continuously from the first domain to the next one without restarting the run.
+
+```python
+data_names=[
+    "cifar10_c_deterministic-gaussian_noise-5;cifar10_c_deterministic-shot_noise-5;cifar10_c_deterministic-impulse_noise-5",
+]
+```
+
+- **Standard TTA / independent domains:** put each domain as a separate string in the Python list. `run_exps.py` will expand them into separate runs, so each domain is evaluated independently. If you use `run_exp.py` directly, launch one command per domain.
+
+```python
+data_names=[
+    "cifar10_c_deterministic-gaussian_noise-5",
+    "cifar10_c_deterministic-shot_noise-5",
+    "cifar10_c_deterministic-impulse_noise-5",
+]
+```
+
+For CTTA runs, domain-wise results are logged when the stream preserves domain boundaries, i.e., `cross_domain_batch_shuffle=false` and `inter_domain` is `HomogeneousNoMixture` or `HeterogeneousNoMixture`. In the logs, these entries are tagged as `type=periodic` and also saved as `[Periodic Stats]` text lines, while the full-stream result is tagged as `type=overall`.
+
 ### Reproduce Paper-Style Runs
 
-Experiment templates are provided in `exps/`. They follow TTAB's configuration style: each file defines a `NewConf.to_be_replaced` dictionary, and `run_exps.py` expands the grid and launches jobs through the bundled tmux-based launcher.
+Experiment templates are provided in `exps/`. Each file defines a `NewConf.to_be_replaced` dictionary, and `run_exps.py` expands the grid and launches jobs through the bundled tmux-based launcher.
 
 ```bash
 python run_exps.py --script_path exps/cifar10c_rn50bn_ctta.py --num_jobs_per_node 2
@@ -174,7 +204,7 @@ python run_extract.py --in_dir logs/<your_log_dir>
 - `ttab/model_adaptation/clip_ori/`: CLIP/VLM wrappers and prompt utilities.
 - `exps/`: reproducible CTTA experiment templates.
 - `run_exp.py`: single-run entry point.
-- `run_exps.py`: grid launcher following TTAB-style experiment configs.
+- `run_exps.py`: grid launcher for experiment configs in `exps/`.
 
 ## Citation
 
@@ -191,4 +221,4 @@ If you find this repository useful, please consider citing our paper:
 
 ## Acknowledgment
 
-This repository is developed upon [TTAB](https://github.com/LINs-lab/ttab). We thank the TTAB authors and the open-source community for making reproducible test-time adaptation research easier.
+This repository builds on prior open-source test-time adaptation codebases. We thank the community for making reproducible research easier.
