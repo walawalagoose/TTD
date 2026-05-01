@@ -221,6 +221,6 @@ If you find this repository useful, please consider citing our paper:
 
 ## Acknowledgment
 
-This repository builds on prior open-source test-time adaptation codebases. We thank the community for making reproducible research easier.
+This repository builds on prior open-source codebase [TTAB](https://github.com/LINs-lab/ttab). We thank the community for making reproducible research easier.
 
 For any additional questions, please feel free to [email](mailto:huangjiazhen1125@gmail.com) me.
