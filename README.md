@@ -12,7 +12,7 @@
   </a>
 </p>
 
-This is the official repository of our paper: [Test-Time Distillation for Continual Model Adaptation](https://arxiv.org/abs/2506.02671), accepted by CVPR 2026 Findings.
+This is the official repository of our paper: [Test-Time Distillation for Continual Model Adaptation](https://openaccess.thecvf.com/content/CVPR2026F/papers/Chen_Test-Time_Distillation_for_Continual_Model_Adaptation_CVPRF_2026_paper.pdf), accepted by CVPR 2026 Findings.
 
 ## Overview
 Continual Test-Time Adaptation (CTTA) usually learns from the target model's own predictions, which can amplify early mistakes under severe distribution shifts. We propose **Test-Time Distillation (TTD)**: instead of relying only on this internal signal, the target model adapts with an external signal from a frozen Vision-Language Model (VLM). Our method, **CoDiRe** (**Co**ntinual **Di**stillation and **Re**ctification), builds a robust blended teacher from the VLM and target model, then uses distillation and optimal-transport-based rectification for stable continual adaptation.
