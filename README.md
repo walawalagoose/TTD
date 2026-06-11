@@ -211,11 +211,12 @@ python run_extract.py --in_dir logs/<your_log_dir>
 If you find this repository useful, please consider citing our paper:
 
 ```bibtex
-@article{chen2025test,
-  title={Test-Time Distillation for Continual Model Adaptation},
-  author={Chen, Xiao* and Huang, Jiazhen* and Liu, Zhiming and Jiang, Qinting and Huang, Fanding and Jiang, Jingyan and Wang, Zhi},
-  journal={arXiv preprint arXiv:2506.02671},
-  year={2025}
+@inproceedings{chen2026test,
+  title={Test-time distillation for continual model adaptation},
+  author={Chen, Xiao and Huang, Jiazhen and Liu, Zhiming and Jiang, Qinting and Huang, Fanding and Jiang, Jingyan and Wang, Zhi},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={7593--7604},
+  year={2026}
 }
 ```
 
